@@ -9,7 +9,7 @@ router.post('/auth/login', wrap(auth.login));
 
 
 router.get('/transactions', wrap(tx.list));
-router.post('/transactions', protect, wrap(tx.create));
+router.post('/transactions', wrap(tx.create));
 router.get('/transactions/:id', wrap(tx.get));
 router.post('/transactions/:id/execute', wrap(tx.execute));
 router.post('/transactions/:id/transition', wrap(tx.transition));

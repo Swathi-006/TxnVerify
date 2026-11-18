@@ -26,7 +26,7 @@ exports.create = async (req, res) => {
   if (!METHODS.includes(paymentMethod)) return res.status(400).json({ message: `Payment method must be one of: ${METHODS.join(', ')}` });
   let id = /^TXN-[A-Z0-9]{6,14}$/.test(transactionId || '') ? transactionId : newId();
   if (await Transaction.exists({ transactionId: id })) id = newId();
-  const tx = await Transaction.create({ transactionId: id, customerName, amount: Number(amount), paymentMethod, description, createdBy: req.user._id });
+  const tx = await Transaction.create({ transactionId: id, customerName, amount: Number(amount), paymentMethod, description, createdBy: null });
   await Log.create({ transactionId: id, serviceName: 'FSM Engine', previousState: 'Initiated', currentState: 'Initiated', event: 'TRANSACTION_CREATED' });
   res.status(201).json(tx);
 };
