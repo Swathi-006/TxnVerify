@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { wrap, protect } = require('../middleware/common');
+const { wrap } = require('../middleware/common');
 const auth = require('../controllers/authController');
 const tx = require('../controllers/transactionController');
 const dash = require('../controllers/dashboardController');
@@ -7,7 +7,7 @@ const dash = require('../controllers/dashboardController');
 router.post('/auth/register', wrap(auth.register));
 router.post('/auth/login', wrap(auth.login));
 
-router.use(protect);
+
 router.get('/transactions', wrap(tx.list));
 router.post('/transactions', wrap(tx.create));
 router.get('/transactions/:id', wrap(tx.get));
